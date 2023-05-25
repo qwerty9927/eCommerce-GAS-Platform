@@ -10,6 +10,7 @@ app.use(helmet())
 app.use(compression())
 
 // inti db
+require("./dbs/init.mongodb")
 
 // router
 
