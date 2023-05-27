@@ -10,11 +10,15 @@ const keyTokenSchema = new Schema({
     require: true,
     ref: "Shop"
   },
-  publicKey: {
+  accessKey: {
     type: String,
     require: true
   },
-  refreshToken: {
+  refreshKey: {
+    type: String,
+    require: true
+  },
+  refreshTokens: {
     type: Array,
     default: []
   }

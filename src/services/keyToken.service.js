@@ -1,10 +1,11 @@
 const keyTokenModel = require('../models/keyToken.model')
 
 class KeyTokenService {
-  static async createKeyToken(userId, publicKey){
+  static async createKeyToken(userId, accessKey, refreshKey){
     const key = keyTokenModel.create({
       userId, 
-      publicKey
+      accessKey,
+      refreshKey
     })
     return !!key 
   }

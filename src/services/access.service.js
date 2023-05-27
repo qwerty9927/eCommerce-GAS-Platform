@@ -3,6 +3,7 @@ const crypto = require("crypto")
 const shopModel = require("../models/shop.model")
 const KeyTokenService = require('./keyToken.service')
 const createTokenPair = require('../auth/authUtils')
+const { getInfoData } = require('../utils')
 
 const RoleShop = {
   SHOP: "S01",
@@ -25,31 +26,22 @@ class AccessService {
         name, email, password: passwordHash, roles: [RoleShop.SHOP] 
       })
       if(newShop) {
-        const { privateKey, publicKey } = crypto.generateKeyPairSync("rsa", {
-          modulusLength: 4096,
-          privateKeyEncoding: {
-            type: "pkcs1",
-            format: "pem"
-          },
-          publicKeyEncoding: {
-            type: "pkcs1",
-            format: "pem"
-          }
-        })
+        const accessKey = crypto.randomBytes(64).toString("hex")
+        const refreshKey = crypto.randomBytes(64).toString("hex")
 
-        const isKeyTokenSuccess = await KeyTokenService.createKeyToken(newShop._id, publicKey)
+        const isKeyTokenSuccess = await KeyTokenService.createKeyToken(newShop._id, accessKey, refreshKey)
         if(!isKeyTokenSuccess){
           return {
             code: 400,
             message: "Key error create"
           }
         }
-        const tokens = createTokenPair({ name, email }, privateKey)
+        const tokens = createTokenPair({ name, email }, accessKey, refreshKey)
         return {
           code: 201,
           message: "User create success",
           metadata: {
-            shop: newShop,
+            shop: getInfoData(newShop, ["_id", "name", "email"]),
             tokens
           }
         }
