@@ -9,3 +9,13 @@ Content-Type: application/json
   "email": "tanvo9930@gmail.com",
   "password": "pass"
 }
+
+### check api key before signUp
+POST {{url_dev}}/shop/signup
+Content-Type: application/json
+
+{
+  "name": "tan",
+  "email": "tanvo9930@gmail.com",
+  "password": "pass"
+}

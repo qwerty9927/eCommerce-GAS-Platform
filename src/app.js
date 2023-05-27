@@ -23,5 +23,19 @@ app.get('/', (req, res, next) => {
 app.use(require("./routes"))
 
 // handing errors
+app.use((req, res, next) => {
+  const error = new Error("Not found")
+  error.statusCode = 404
+  next(error)
+})
+
+app.use((error, req, res, next) => {
+  const statusCode = error.statusCode || 500
+  return res.status(statusCode).json({
+    status: "error",
+    code: statusCode,
+    message: error.message || "Internal Server Error"
+  })
+})
 
 module.exports = app
