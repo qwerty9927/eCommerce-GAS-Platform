@@ -1,7 +1,7 @@
 
 const STATUS_CODE = {
-  FORBIDDEN: "403",
-  CONFLICT: "409"
+  FORBIDDEN: 403,
+  CONFLICT: 409
 }
 
 const REASON_STATUS_CODE = {

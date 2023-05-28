@@ -32,12 +32,8 @@ class AccessService {
       }
       const tokens = createTokenPair({ name, email }, accessKey, refreshKey)
       return {
-        code: 201,
-        message: "User create success",
-        metadata: {
-          shop: getInfoData(newShop, ["_id", "name", "email"]),
-          tokens
-        }
+        shop: getInfoData(newShop, ["_id", "name", "email"]),
+        tokens
       }
     }
     throw new Error()

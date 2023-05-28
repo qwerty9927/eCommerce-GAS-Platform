@@ -1,11 +1,14 @@
+const { Created } = require('../core/success.response')
 const AccessService = require('../services/access.service')
 
 class AccessController {
   async signUp(req, res, next) {
     try {
-      const serviceRes = await AccessService.signUp(req.body)
-      res.status(serviceRes.code).json(serviceRes)
-      } catch(error) {
+      new Created({
+        message: "User created success",
+        metaData: await AccessService.signUp(req.body)
+      }).send({ res })
+    } catch(error) {
       next(error)
     }
   }

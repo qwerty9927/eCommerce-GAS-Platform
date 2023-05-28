@@ -31,8 +31,9 @@ app.use((req, res, next) => {
 
 app.use((error, req, res, next) => {
   const statusCode = error.statusCode || 500
+  // console.log(error)
   return res.status(statusCode).json({
-    status: "error",
+    status: "Error",
     code: statusCode,
     message: error.message || "Internal Server Error"
   })

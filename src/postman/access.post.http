@@ -1,7 +1,7 @@
 ### signUp
 @url_dev = http://localhost:3052/v1/api
 
-POST {{url_dev}}/shop/signup
+POST {{url_dev}}/shop/signupjlk
 Content-Type: application/json
 
 {
@@ -12,10 +12,11 @@ Content-Type: application/json
 
 ### check api key before signUp
 POST {{url_dev}}/shop/signup
+x-api-key: 123
 Content-Type: application/json
 
 {
   "name": "tan",
-  "email": "tanvo9930@gmail.com",
+  "email": "tanvo9936@gmail.com",
   "password": "pass"
 }
